@@ -1,27 +1,18 @@
-const url = "https://cat-fact.herokuapp.com/facts";
+const BASE_URL = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd/inr.json";
 
-const factPara = document.querySelector("#fact");
-const btn = document.querySelector("#btn");
+const dropdowns = document.querySelectorAll(".dropdown select");
 
 
-// const getFacts = async () => {
-//     console.log("getting data ....");
-//     let response = await fetch(url);
-//     console.log(response);
-//     let data = await response.json();
-    
-//     factPara.innerText = data[1].text;
-    
-// }
-
-function getFacts() {
-    fetch(url)
-    .then((response) => {
-    return response.json();
-    })
-    .then((data) => {
-        console.log(data);
-        factPara.innerText = data[2].text;
-    })
+for (let select of dropdowns) {
+    for (currCode in countryList) {
+        let newOption = document.createElement("option");
+        newOption.innerText = currCode;
+        newOption.value = currCode;
+        if (select.name === "from" && currCode==="NPR") {
+            newOption.selected = "selected";
+        } else if (select.name === "to" && currCode==="KRW") {
+            newOption.selected = "selected";
+        }
+        select.append(newOption);
+    }
 }
-btn.addEventListener("click", getFacts)
